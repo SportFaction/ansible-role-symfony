@@ -1,0 +1,22 @@
+---
+
+- name: Set application parameters
+  template:
+    src: templates/parameters.yml.js2
+    dest: "{{ project_root }}/app/config/parameters.yml"
+
+- name: Set symfony_console.
+  set_fact: symfony_console="{{ project_root }}/{{ console_command }} --env={{ env }}"
+
+- name: Add jwt directory
+  file: path={{project_root}}/var/jwt state=directory mode=0755
+
+- name: Add jwt private key
+  copy: content="{{ jwt_private_pem }}" dest={{ project_root }}/var/jwt/private.pem
+
+- name: Add jwt public key
+  copy: content="{{ jwt_public_pem }}" dest={{ project_root }}/var/jwt/public.pem
+
+- name: Replace cache and log directory
+  shell: |
+    sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php

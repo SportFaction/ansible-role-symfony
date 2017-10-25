@@ -1,0 +1,32 @@
+---
+
+- name: Copy PGSQL Databases to System
+  copy:
+    src: db/{{ item.name }}.pgsql
+    dest: /tmp
+  with_items:
+  - '{{postgresql_databases}}'
+
+- name: Import Databases
+  shell: export PGPASSWORD='{{ db_pass }}' && psql -U sportfaction -h localhost -d sportfaction < /tmp/sportfaction.pgsql
+
+
+- name: Schema Update.
+  action: shell {{php_path}} {{symfony_console}} doctrine:schema:update --force
+  run_once: true
+
+- name: Copy Redis Databases to System
+  copy:
+    src: db/dump.rdb
+    dest: /tmp
+
+- name: import bdd Redis
+  shell: |
+      rdis-cli -a {{ redis_requirepass }} shutdown
+      cd /var/redis/6379
+      rm -f dump.rdb
+      mv /tmp/dump.rdb /var/redis/6379
+      chown redis:redis /var/redis/6379/dump.rdb
+      /etc/init.d/redis_6379 start
+      redis-cli -a {{ redis_requirepass }} BGREWRITEAOF
+      redis-cli -a {{ redis_requirepass }} info | grep aof_rewrite_in_progress

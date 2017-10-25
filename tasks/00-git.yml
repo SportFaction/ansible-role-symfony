@@ -1,0 +1,11 @@
+---
+
+- name: install git package
+  apt: pkg={{item}} state=present update_cache=yes cache_valid_time=604800
+  with_items:
+    - git
+
+- name: Pull sources from the repository.
+  git: repo={{repo}} dest={{project_root}} version={{branch}} accept_hostkey=yes
+  become_user: ubuntu
+

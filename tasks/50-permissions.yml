@@ -1,0 +1,14 @@
+- name: Set permission for logs and cache folders.
+  acl:
+    path: /dev/shm/var
+    entity: www-data
+    etype: user
+    permissions: rwx
+    recursive: true
+    state: present
+
+# - name: Set permission for logs and cache folders.
+#   shell: |
+#     set HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1)
+#     setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /dev/shm/var
+#     setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /dev/shm/var

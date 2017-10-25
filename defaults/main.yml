@@ -1,0 +1,30 @@
+---
+# necessary project vars
+
+project_root: ""
+repo_git: ""
+env: ""
+branch: ""
+composer_path: ""
+
+db_host: ""
+db_name: ""
+db_user: ""
+db_pass: ""
+
+release: ~
+php_path: php
+github_token: ~
+console_opts: ""
+console_command: "bin/console"
+config_dir: "app/config"
+cache_command: cache:warmup
+
+manage_composer: True
+composer_opts: "--no-dev --optimize-autoloader --no-interaction"
+composer_run_install: True
+
+enable_cache_warmup: True
+schema_update: False
+migrations: False
+symlink_assets: True

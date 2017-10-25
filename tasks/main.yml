@@ -1,0 +1,14 @@
+---
+- include: 00-git.yml
+
+- include: 10-config.yml
+
+- include: 20-composer.yml
+
+- include: 30-cache.yml
+
+- include: 40-assets.yml
+
+- include: 50-permissions.yml
+
+- include: 60-db.yml

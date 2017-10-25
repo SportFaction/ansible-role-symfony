@@ -1,0 +1,40 @@
+parameters:
+    secret: {{ secret }}
+
+    # DATABASE
+    database_host:     {{ db_host }}
+    database_name:     {{ db_name }}
+    database_user:     {{ db_user }}
+    database_password: {{ db_pass }}
+    database_port:     ~
+
+    # FACEBOOK
+    facebook_app_id:        {{ facebook_app_id }}
+    facebook_app_secret:    {{ facebook_app_secret }}
+    facebook_graph_version: 'v2.9'
+
+    # JWT
+    jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
+    jwt_public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
+    jwt_key_pass_phrase:  {{ jwt_key_pass_phrase }}
+    jwt_token_ttl:        3600
+
+    # MAILER
+    mailer_transport: smtp
+    mailer_host:      127.0.0.1
+    mailer_user:      admin@mail.com
+    mailer_password:  ~
+
+    # MAILJET
+    mailjet_api_key: {{ mailjet_api_key }}
+    mailjet_secret_key: {{ mailjet_secret_key }}
+
+    # MOBILE
+    sdapi_key:         {{ sdapi_key }}
+    android_api_key:   {{ android_api_key }}
+    ios_api_key:       {{ ios_api_key }}
+    cors_allow_origin: http://localhost
+
+    # REDIS
+    redis_tcp:      'tcp://localhost:6379'
+    redis_password: {{ redis_requirepass }}
