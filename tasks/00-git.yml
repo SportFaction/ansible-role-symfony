@@ -1,5 +1,8 @@
 ---
 
+- name: Add project directory
+  file: path={{project_root}} state=directory mode=0755
+
 - name: install git package
   apt: pkg={{item}} state=present update_cache=yes cache_valid_time=604800
   with_items:
