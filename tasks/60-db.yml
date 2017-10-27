@@ -6,9 +6,11 @@
     dest: /tmp
   with_items:
   - '{{postgresql_databases}}'
+  when: build == 'vagrant'
 
 - name: Import Databases
   shell: export PGPASSWORD='{{ db_pass }}' && psql -U sportfaction -h localhost -d sportfaction < /tmp/sportfaction.pgsql
+  when: build == 'vagrant'
 
 
 - name: Schema Update.
@@ -19,6 +21,7 @@
   copy:
     src: db/dump.rdb
     dest: /tmp
+  when: build == 'vagrant'  
 
 - name: import bdd Redis
   shell: |
@@ -30,3 +33,4 @@
       /etc/init.d/redis_6379 start
       redis-cli -a {{ redis_requirepass }} BGREWRITEAOF
       redis-cli -a {{ redis_requirepass }} info | grep aof_rewrite_in_progress
+  when: build == 'vagrant'

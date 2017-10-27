@@ -20,3 +20,4 @@
 - name: Replace cache and log directory
   shell: |
     sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
+  when: build == 'vagrant'
