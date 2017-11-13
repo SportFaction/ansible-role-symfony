@@ -1,0 +1,22 @@
+parameters:
+    secret: {{ secret }}
+
+    # DATABASE
+    database_host:     {{ db_host }}
+    database_name:     {{ db_name }}
+    database_user:     {{ db_user }}
+    database_password: {{ db_pass }}
+    database_port:     ~
+
+    # MAILER
+    mailer_transport: smtp
+    mailer_host:      127.0.0.1
+    mailer_user:      admin@mail.com
+    mailer_password:  ~
+
+    # RABBITMQ
+    rabbit_mq_host: {{ rabbit_mq_host }}
+    rabbit_mq_port: 5671
+    rabbit_mq_user: rabbit
+    rabbit_mq_password: {{ rabbit_mq_pass }}
+    rabbit_mq_vhost: /

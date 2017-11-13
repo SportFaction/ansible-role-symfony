@@ -2,6 +2,7 @@
 # necessary project vars
 
 project_root: ""
+project_type: "default"
 repo_git: ""
 env: ""
 branch: ""
