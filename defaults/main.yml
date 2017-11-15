@@ -34,8 +34,6 @@ symlink_assets: True
 postgresql_version: 9.6
 postgresql_admin_user: "postgres"
 postgresql_default_auth_method: "trust"
-postgresql_listen_addresses:
-  - *
 postgresql_databases:
   - name: database
     owner: user          # optional; specify the owner of the database
