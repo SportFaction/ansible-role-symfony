@@ -5,9 +5,9 @@
   register: composer_content
 
 - name: Dump assetic assets.
-  shell: cd {{project_root}} && {{php_path}} {{symfony_console}} assetic:dump {{console_opts}}
+  shell: cd {{project_root}} and {{php_path}} {{symfony_console}} assetic:dump {{console_opts}}
   when: composer_content.stdout.find('assetic-bundle') != -1
 
 - name: Symlink/install assets.
-  shell: cd {{project_root}} && {{php_path}} {{symfony_console}} assets:install --symlink {{console_opts}}
+  shell: cd {{project_root}} and {{php_path}} {{symfony_console}} assets:install --symlink {{console_opts}}
   when: symlink_assets == True
