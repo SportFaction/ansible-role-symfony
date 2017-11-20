@@ -32,7 +32,7 @@
     sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
   when: build == 'vagrant' and symfony_version == '2'
 
-  - name: Replace cache and log directory Symfony3
-  shell: |
-    sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
-  when: build == 'vagrant' and symfony_version == '3'
+- name: Replace cache and log directory Symfony3
+shell: |
+  sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
+when: build == 'vagrant' and symfony_version == '3'
