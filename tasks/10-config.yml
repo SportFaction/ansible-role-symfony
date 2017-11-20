@@ -27,7 +27,12 @@
   copy: content="{{ jwt_public_pem }}" dest={{ project_root }}/var/jwt/public.pem
   when: project_type == 'default'
   
-- name: Replace cache and log directory
+- name: Replace cache and log directory Symfony2
   shell: |
     sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
-  when: build == 'vagrant'
+  when: build == 'vagrant' and symfony_version == '2'
+
+  - name: Replace cache and log directory Symfony3
+  shell: |
+    sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
+  when: build == 'vagrant' and symfony_version == '3'

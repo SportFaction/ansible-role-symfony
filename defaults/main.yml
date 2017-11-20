@@ -3,6 +3,7 @@
 
 project_root: ""
 project_type: "default"
+symfony_version: "3"
 repo_git: ""
 env: ""
 branch: ""
