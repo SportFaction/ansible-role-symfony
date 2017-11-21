@@ -6,7 +6,27 @@
     permissions: rwx
     recursive: true
     state: present
-  when: build == 'vagrant'
+  when: build == 'vagrant' and symfony_version == '3'
+
+- name: Set permission for cache folders.
+  acl:
+    path: /dev/shm/cache
+    entity: www-data
+    etype: user
+    permissions: rwx
+    recursive: true
+    state: present
+  when: build == 'vagrant' and symfony_version == '2'
+
+- name: Set permission for logs folders.
+  acl:
+    path: /dev/shm/logs
+    entity: www-data
+    etype: user
+    permissions: rwx
+    recursive: true
+    state: present
+  when: build == 'vagrant' and symfony_version == '2'
 
 - name: Set permission for logs and cache folders.
   acl:
@@ -16,4 +36,24 @@
     permissions: rwx
     recursive: true
     state: present
-  when: build == 'aws'
+  when: build == 'aws' and symfony_version == '3'
+
+- name: Set permission for cache folders.
+  acl:
+    path: "{{ project_root }}/app/cache"
+    entity: www-data
+    etype: user
+    permissions: rwx
+    recursive: true
+    state: present
+  when: build == 'aws' and symfony_version == '2'
+
+- name: Set permission for logs folders.
+  acl:
+    path: "{{ project_root }}/app/logs"
+    entity: www-data
+    etype: user
+    permissions: rwx
+    recursive: true
+    state: present
+  when: build == 'aws' and symfony_version == '2'
