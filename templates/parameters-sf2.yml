@@ -1,0 +1,72 @@
+parameters:
+    secret: {{ secret }}
+
+    # COMNPAY
+    comnpay_api_url: {{ comnpay_api_url }}
+    comnpay_api_serial_number: {{ comnpay_api_serial_number }}
+    comnpay_api_key: {{ comnpay_api_key }}
+
+    # DATABASE
+    database_host:     {{ db_host }}
+    database_name:     {{ db_name }}
+    database_user:     {{ db_user }}
+    database_password: {{ db_pass }}
+    database_port:     ~
+
+    # FACEBOOK
+    facebook_app_id:        {{ facebook_app_id }}
+    facebook_secret:    {{ facebook_app_secret }}
+
+    # GRAYLOG
+    graylog_host: {{ graylog_host }}
+    graylog_port: 12200
+
+    # KNP
+    knp_paginator.template.pagination: 'AppWebBundle:Pagination:sliding.html.twig'
+    knp_paginator.template.sortable: 'AppWebBundle:Pagination:sortable_link.html.twig'
+
+    # KPI
+    kpi_gsutil_cmd: gsutil
+    kpi_tmp_folder: /tmp/kpis
+
+    # MAILER
+    mailer_transport: smtp
+    mailer_host:      127.0.0.1
+    mailer_user:      admin@mail.com
+    mailer_password:  ~
+
+    # MAILJET
+    mailjet: {{ mailjet }}
+    mailjet_btb: {{ mailjet_btb }}
+    mailjet_api_key: {{ mailjet_api_key }}
+    mailjet_secret_key: {{ mailjet_secret_key }}
+
+    # MOBILE
+    sdapi_key:         {{ sdapi_key }}
+    android_api_key:   {{ android_api_key }}
+    ios_api_key:       {{ ios_api_key }}
+    cors_allow_origin: http://localhost
+
+    # OAUTH
+    client_id: {{ client_id }}
+    client_secret: {{ client_secret }}
+
+    # OPTA
+    xsf_key: {{ xsf_key }}
+    opta_key: {{ opta_key }}
+    opta_username: {{ opta_username }}
+
+    # REDIS
+    redis_tcp:      'tcp://localhost:6379'
+    redis_password: {{ redis_requirepass }}
+
+    # URL
+    url_btb: 'https://sportfaction.com/btb/'
+    url_ffc: 'https://sportfaction.com/'
+    
+
+    nb_type_score: 2
+    ip_server: {{ ip_server }}
+    locale: fr
+    websocket: 'https://www.sportfaction/websocket'
+    
