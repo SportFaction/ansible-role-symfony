@@ -29,7 +29,7 @@
   
 - name: Replace cache and log directory Symfony2
   shell: |
-    sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
+    sed -i -e "s/\$this->rootDir.'\/'.\$this->environment.'/'\/dev\/shm/g" {{ project_root }}/app/AppKernel.php
   when: build == 'vagrant' and symfony_version == '2'
 
 - name: Replace cache and log directory Symfony3
