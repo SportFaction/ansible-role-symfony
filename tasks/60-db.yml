@@ -17,7 +17,7 @@
     src: db/{{ item.name }}.gz
     dest: /var/www
   with_items:
-  - '{{mysql_databases}}'
+  - '{{mysql_db}}'
   when: build == 'vagrant' and symfony_version == '2'
 
 - name: Import Databases
@@ -26,7 +26,7 @@
     name: "{{ item.name }}"
     target: /tmp/{{ item.name }}.gz
   with_items:
-  - '{{mysql_databases}}'
+  - '{{mysql_db}}'
   when: build == 'vagrant' and symfony_version == '2'
 
 - name: Schema Update.
