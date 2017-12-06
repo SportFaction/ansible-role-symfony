@@ -14,7 +14,7 @@
 
 - name: Copy Databases to System
   copy:
-    src: db/{{ item.name }}.gz
+    src: db/{{ item.name }}
     dest: /var/www
   with_items:
   - '{{mysql_db}}'
@@ -24,7 +24,7 @@
   mysql_db:
     state: import
     name: "{{ item.name }}"
-    target: /tmp/{{ item.name }}.gz
+    target: /tmp/{{ item.name }}
   with_items:
   - '{{mysql_db}}'
   when: build == 'vagrant' and symfony_version == '2'
@@ -32,7 +32,7 @@
 - name: Schema Update.
   action: shell {{php_path}} {{symfony_console}} doctrine:schema:update --force
   run_once: true
-  when: project_type == 'default'
+  when: build == 'vagrant' and project_type == 'default'
 
 - name: Copy Redis Databases to System
   copy:

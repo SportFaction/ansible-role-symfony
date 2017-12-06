@@ -1,12 +1,8 @@
 ---
-# - name: Remove cache dir manually.
-#   file: state=absent path={{project_root}}/app/cache/{{env}}
-#   when: enable_cache_warmup == True
-#   tags:
-#     - cache
-
-# - name: Warmup sf cache.
-#   shell: cd {{project_root}} and export SYMFONY_ENV={{env}}; {{php_path}} {{symfony_console}} {{cache_command}} {{console_opts}}
-#   when: enable_cache_warmup == True
-#   tags:
-#     - cache
+- name: Remove cache dir manually.
+  file: state=absent path={{project_root}}/app/cache/{{env}}
+  when: build == 'vagrant'
+  
+- name: Warmup sf cache.
+  shell: cd {{project_root}} and export SYMFONY_ENV={{env}}; {{php_path}} {{symfony_console}} {{cache_command}} {{console_opts}}
+  when: build == 'vagrant'
