@@ -31,6 +31,8 @@ schema_update: False
 migrations: False
 symlink_assets: True
 
+redis_tcp: 'tcp://localhost:6379'
+
 # POSTRESQL
 postgresql_version: 9.6
 postgresql_admin_user: "postgres"

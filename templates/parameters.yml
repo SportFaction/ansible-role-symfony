@@ -36,5 +36,4 @@ parameters:
     cors_allow_origin: http://localhost
 
     # REDIS
-    redis_tcp:      'tcp://localhost:6379'
-    redis_password: {{ redis_requirepass }}
+    redis_tcp:      {{ redis_tcp }}
