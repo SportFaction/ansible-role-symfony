@@ -32,6 +32,7 @@ migrations: False
 symlink_assets: True
 
 redis_tcp: 'tcp://localhost:6379'
+redis_requirepass: ''
 
 # POSTRESQL
 postgresql_version: 9.6

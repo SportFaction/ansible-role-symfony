@@ -37,3 +37,4 @@ parameters:
 
     # REDIS
     redis_tcp:      {{ redis_tcp }}
+    redis_password: {{ redis_requirepass }}
