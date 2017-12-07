@@ -23,8 +23,16 @@
 
 - name: Run composer install.
   shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
-  when: composer_run_install == True
+  when: composer_run_install == True and build == 'aws'
+
+- name: Run composer install.
+  shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
+  when: composer_run_install == True and build == 'vagrant'
 
 - name: Generate Class Map
   shell: "cd {{project_root}} && {{composer_path}} dump-autoload --optimize --no-dev --classmap-authoritative"
-  when: composer_run_install == True
+  when: composer_run_install == True and build == 'aws'
+
+- name: Generate Class Map
+  shell: "cd {{project_root}} && {{composer_path}} dump-autoload --optimize --classmap-authoritative"
+  when: composer_run_install == True and build == 'vagrant'
