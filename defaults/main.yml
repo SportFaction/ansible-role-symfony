@@ -23,7 +23,6 @@ config_dir: "app/config"
 cache_command: cache:warmup
 
 manage_composer: True
-composer_opts: "--no-dev --optimize-autoloader --no-interaction"
 composer_run_install: True
 
 enable_cache_warmup: True
