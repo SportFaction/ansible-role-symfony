@@ -14,6 +14,6 @@
   when: build == 'vagrant'
 
 - name: Pull sources from the repository.
-  git: repo={{repo}} dest={{project_root}} version={{branch}} accept_hostkey=yes key_file=/tmp/private_key
+  git: repo={{repo}} dest={{project_root}} version={{branch}} accept_hostkey=yes key_file=/home/ubuntu/.ssh/id_rsa
   when: build == 'aws'
 
