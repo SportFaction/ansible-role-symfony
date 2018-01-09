@@ -15,6 +15,5 @@
 
 - name: Pull sources from the repository.
   git: repo={{repo}} dest={{project_root}} version={{branch}} accept_hostkey=yes key_file=/tmp/private_key
-  become_user: ubuntu
   when: build == 'aws'
 
