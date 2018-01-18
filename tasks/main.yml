@@ -12,3 +12,6 @@
 - include: 50-permissions.yml
 
 - include: 60-db.yml
+
+- include: 70-db.yml
+  when: project_type == 'event'

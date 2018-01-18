@@ -20,3 +20,7 @@ parameters:
     rabbit_mq_user: rabbit
     rabbit_mq_password: {{ rabbit_mq_pass }}
     rabbit_mq_vhost: /
+
+    # ELASTICSEARCH
+    elastic_host: http://master-esnode.casualfantasyfootball.com:9200
+

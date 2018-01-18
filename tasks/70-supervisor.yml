@@ -1,0 +1,92 @@
+---
+- name: Ensure Pip is installed.
+  package:
+    name: "{{ pip_package }}"
+    state: present
+
+- name: Ensure pip_install_packages are installed.
+  pip:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  with_items: "{{ pip_install_packages }}"
+  
+- name: Ensure Supervisor is installed (specific version).
+  pip:
+    name: supervisor
+    state: present
+    version: "{{ supervisor_version }}"
+  when: supervisor_version != 'latest'
+
+- name: Ensure Supervisor is installed (latest version).
+  pip:
+    name: supervisor
+    state: present
+  when: supervisor_version == 'latest'
+
+- name: Ensure Supervisor log dir exists.
+  file:
+    path: "{{ supervisor_log_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Ensure Supervisor config paths are present.
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  with_items:
+    - "{{ supervisor_config_path }}"
+    - "{{ supervisor_config_path }}/conf.d"
+
+- name: Ensure Supervisor configuration is present.
+  template:
+    src: supervisord.conf.j2
+    dest: "{{ supervisor_config_path }}/supervisord.conf"
+    mode: 0644
+  notify: restart supervisor
+
+- name: Ensure Supervisor program configs are present.
+  template:
+    src: program.conf.j2
+    dest: "{{ supervisor_config_path }}/conf.d/{{ item.name }}.conf"
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when: item.state|default('present') != 'absent'
+  with_items: "{{ supervisor_programs }}"
+  notify: restart supervisor
+- name: Copy Supervisor init file into place (for non-systemd systems).
+  template:
+    src: "supervisord.init.j2"
+    dest: /etc/init.d/supervisord
+    owner: root
+    group: root
+    mode: 0755
+  when: "ansible_service_mgr != 'systemd'"
+  notify: restart supervisor
+
+- name: Copy Supervisor unit file into place (for systemd systems).
+  template:
+    src: supervisord.unit.j2
+    dest: /etc/systemd/system/supervisord.service
+    owner: root
+    group: root
+    mode: 0644
+  when: "ansible_service_mgr == 'systemd'"
+  notify: restart supervisor
+
+- name: Ensure Supervisor is started (if configured).
+  service:
+    name: supervisord
+    state: started
+  when: supervisor_started
+
+- name: Ensure Supervisor is enabled at boot (if configured).
+  service:
+    name: supervisord
+    enabled: yes
+  when: supervisor_enabled
