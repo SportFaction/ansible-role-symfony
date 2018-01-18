@@ -13,5 +13,5 @@
 
 - include: 60-db.yml
 
-- include: 70-db.yml
+- include: 70-supervisor.yml
   when: project_type == 'event'
