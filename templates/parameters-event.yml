@@ -22,5 +22,5 @@ parameters:
     rabbit_mq_vhost: /
 
     # ELASTICSEARCH
-    elastic_host: http://master-esnode.casualfantasyfootball.com:9200
+    elastic_host: {{ elasticsearch_host }}
 
