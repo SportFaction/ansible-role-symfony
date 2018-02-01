@@ -40,6 +40,7 @@ parameters:
     redis_password: {{ redis_requirepass }}
 
     # GOOGLE
+    app_package_name: {{ app_package_name }}
     google_client_id: {{ google_client_id }}
     google_client_secret: {{ google_client_secret }}
 
