@@ -38,3 +38,8 @@ parameters:
     # REDIS
     redis_tcp:      {{ redis_tcp }}
     redis_password: {{ redis_requirepass }}
+
+    # GOOGLE
+    google_client_id: {{ google_client_id }}
+    google_client_secret: {{ google_client_secret }}
+
