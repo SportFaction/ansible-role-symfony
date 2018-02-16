@@ -11,7 +11,7 @@ parameters:
     # FACEBOOK
     facebook_app_id:        {{ facebook_app_id }}
     facebook_app_secret:    {{ facebook_app_secret }}
-    facebook_graph_version: 'v2.9'
+    facebook_graph_version: 'v2.12'
 
     # JWT
     jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
@@ -34,6 +34,7 @@ parameters:
     android_api_key:   {{ android_api_key }}
     ios_api_key:       {{ ios_api_key }}
     cors_allow_origin: http://localhost
+    event_base_url:    http://localhost
 
     # REDIS
     redis_tcp:      {{ redis_tcp }}
