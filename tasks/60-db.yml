@@ -9,7 +9,9 @@
   when: build == 'vagrant' and project_type == 'default' and symfony_version == '3'
 
 - name: Import Databases
-  shell: export PGPASSWORD='{{ db_pass }}' and psql -U sportfaction -h localhost -d sportfaction < /tmp/sportfaction.pgsql
+  shell: export PGPASSWORD='{{ db_pass }}' && psql -U {{ db_user }} -h {{ db_host }} -d {{ db_name }} < /tmp/{{ item.name }}.pgsql
+  with_items:
+  - '{{postgresql_databases}}'
   when: build == 'vagrant' and project_type == 'default' and symfony_version == '3'
 
 - name: Copy Databases to System
