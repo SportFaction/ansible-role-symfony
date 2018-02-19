@@ -1,0 +1,5 @@
+- name: Set aws crendetials
+  template:
+    src: templates/aws-credentials.yml
+    dest: "/home/ubuntu/.aws/credentials"
+  when: project_type == 'default' and symfony_version == '3'

@@ -15,3 +15,5 @@
 
 - include: 70-supervisor.yml
   when: project_type == 'event'
+
+- include: 80-aws.yml
