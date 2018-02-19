@@ -1,3 +1,13 @@
+- name: create .aws
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: ubuntu
+    group: ubuntu
+  with_items:
+    - ".aws"
+
 - name: Set aws crendetials
   template:
     src: templates/aws-credentials.yml
