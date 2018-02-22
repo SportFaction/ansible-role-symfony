@@ -34,7 +34,7 @@
 - name: Schema Update.
   action: shell {{php_path}} {{symfony_console}} doctrine:schema:update --force
   run_once: true
-  when: build == 'vagrant' and project_type == 'default'
+  # when: build == 'vagrant' and project_type == 'default'
 
 - name: Copy Redis Databases to System
   copy:
