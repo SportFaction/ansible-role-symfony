@@ -1,0 +1,5 @@
+- cron:
+    name: "access token google"
+    minute: "0"
+    hour: "30"
+    job: "sudo bin/console sf:core:google:refresh_token"

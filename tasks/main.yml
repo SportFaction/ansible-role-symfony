@@ -17,3 +17,5 @@
   when: project_type == 'event'
 
 - include: 80-aws.yml
+
+- include: 90-cron.yml
