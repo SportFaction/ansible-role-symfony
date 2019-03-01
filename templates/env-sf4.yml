@@ -16,13 +16,13 @@ facebook_graph_version={{ facebook_graph_version }}
 # JWT
 JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
 JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE={{ jwt_passphrase }}
+JWT_PASSPHRASE={{ jwt_key_pass_phrase }}
 
 # GOOGLE
 app_package_name={{ app_package_name }}
 GOOGLE_API_KEY={{ google_client_secret }}
 GOOGLE_CLIENT_ID={{ google_client_id }}
-GOOGLE_CLIENT_SECRET=_6wsioI036HRRxyKB72K7ImS
+GOOGLE_CLIENT_SECRET={{ google_client_secret }}
 
 # MAILER
 MAILER_URL=null://localhost
