@@ -60,3 +60,7 @@
   shell: |
     sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/app/AppKernel.php
   when: build == 'vagrant' and symfony_version == '3'
+
+- name: Add var directory
+  file: path={{project_root}}/var state=directory mode=0755
+  when: project_type == 'default' and symfony_version == '4'
