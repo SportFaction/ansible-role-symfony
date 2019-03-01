@@ -36,7 +36,7 @@
     permissions: rwx
     recursive: true
     state: present
-  when: build == 'aws' and symfony_version == '3'
+  when: build == 'aws' and (symfony_version == '3' or symfony_version == '4')
 
 - name: Set permission for cache folders.
   acl:

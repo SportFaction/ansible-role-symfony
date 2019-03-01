@@ -1,0 +1,42 @@
+#APP
+APP_ENV=dev
+APP_SECRET=d13dd3eeea6f6b5ade13e0c7cfa81773
+
+# API
+CORS_ALLOW_ORIGIN=^http://localhost$
+
+# DATABASE
+DATABASE_URL=pgsql://{{ db_user }}:{{ db_pass }}@{{ db_host }}:5432/{{ db_name }}
+
+# FACEBOOK
+facebook_app_id={{ facebook_app_id }}
+facebook_secret={{ facebook_app_secret }}
+facebook_graph_version={{ facebook_graph_version }}
+
+# JWT
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE={{ jwt_passphrase }}
+
+# GOOGLE
+app_package_name={{ app_package_name }}
+GOOGLE_API_KEY={{ google_client_secret }}
+GOOGLE_CLIENT_ID={{ google_client_id }}
+GOOGLE_CLIENT_SECRET=_6wsioI036HRRxyKB72K7ImS
+
+# MAILER
+MAILER_URL=null://localhost
+
+# REDIS
+redis_tcp='tcp://localhost:6379'
+redis_password={{ redis_requirepass }}
+
+# MAILJET
+mailjet_api_key={{ mailjet_api_key }}
+mailjet_secret_key={{ mailjet_secret_key }}
+
+# MOBILE
+sdapi_key={{ sdapi_key }}
+android_api_key={{ android_api_key }}
+ios_api_key={{ ios_api_key }}
+cors_allow_origin=http://localhost

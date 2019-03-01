@@ -12,4 +12,4 @@
   template:
     src: templates/aws-credentials.yml
     dest: "/home/ubuntu/.aws/credentials"
-  when: project_type == 'default' and symfony_version == '3'
+  when: project_type == 'default' and (symfony_version == '3' or symfony_version == '4')

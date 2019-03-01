@@ -1,16 +1,22 @@
 ---
 
+- name: Set application parameters SF2
+  template:
+    src: templates/parameters-sf2.yml
+    dest: "{{ project_root }}/app/config/parameters.yml"
+  when: project_type == 'default' and symfony_version == '2'
+
 - name: Set application parameters SF3
   template:
     src: templates/parameters.yml
     dest: "{{ project_root }}/app/config/parameters.yml"
   when: project_type == 'default' and symfony_version == '3'
 
-- name: Set application parameters SF2
+  - name: Set application parameters SF4
   template:
-    src: templates/parameters-sf2.yml
-    dest: "{{ project_root }}/app/config/parameters.yml"
-  when: project_type == 'default' and symfony_version == '2'
+    src: templates/env-sf4.yml
+    dest: "{{ project_root }}/.env"
+  when: project_type == 'default' and symfony_version == '4'
 
 - name: Set application parameters SF3 EVENT
   template:
@@ -32,6 +38,18 @@
 - name: Add jwt public key
   copy: content="{{ jwt_public_pem }}" dest={{ project_root }}/var/jwt/public.pem
   when: project_type == 'default' and symfony_version == '3'
+
+- name: Add jwt directory
+  file: path={{project_root}}/config/jwt state=directory mode=0755
+  when: project_type == 'default' and symfony_version == '4'
+
+- name: Add jwt private key
+  copy: content="{{ jwt_private_pem }}" dest={{ project_root }}/config/jwt/private.pem
+  when: project_type == 'default' and symfony_version == '4'
+
+- name: Add jwt public key
+  copy: content="{{ jwt_public_pem }}" dest={{ project_root }}/config/jwt/public.pem
+  when: project_type == 'default' and symfony_version == '4'
   
 - name: Replace cache and log directory Symfony2
   shell: |
