@@ -63,7 +63,7 @@
 
 - name: Replace cache and log directory Symfony4
   shell: |
-    sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/src/Kernel.php
+    sudo sed -i -e "s/dirname(__DIR__).'\//'\/dev\/shm\//g" {{ project_root }}/src/Kernel.php
   when: build == 'vagrant' and symfony_version == '4'
 
 - name: Add var directory
