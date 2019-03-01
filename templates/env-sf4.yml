@@ -1,6 +1,6 @@
 #APP
 APP_ENV=dev
-APP_SECRET=d13dd3eeea6f6b5ade13e0c7cfa81773
+APP_SECRET={{secret}}
 
 # API
 CORS_ALLOW_ORIGIN=^http://localhost$
