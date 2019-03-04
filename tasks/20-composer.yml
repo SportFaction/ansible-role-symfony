@@ -25,9 +25,9 @@
   shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
   when: composer_run_install == True and build == 'aws'
 
-- name: Run composer install.
-  shell: cd {{project_root}} && {{composer_path}} install
-  when: composer_run_install == True and build == 'aws' and symfony_version == '4'
+# - name: Run composer install.
+#   shell: cd {{project_root}} && {{composer_path}} install
+#   when: composer_run_install == True and build == 'aws' and symfony_version == '4'
 
 - name: Run composer install.
   shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
