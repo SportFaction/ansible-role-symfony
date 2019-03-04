@@ -22,7 +22,7 @@
     state: present
   when: (build == 'vagrant' and symfony_version == '2') 
 
-  - name: Set permission for logs folders.
+- name: Set permission for logs folders.
   acl:
     path: /dev/shm/logs
     entity: www-data
