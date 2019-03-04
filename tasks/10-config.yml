@@ -39,6 +39,10 @@
   copy: content="{{ jwt_public_pem }}" dest={{ project_root }}/var/jwt/public.pem
   when: project_type == 'default' and symfony_version == '3'
 
+- name: Add var directory
+  file: path={{project_root}}/var state=directory mode=0755
+  when: project_type == 'default' and symfony_version == '4'
+
 - name: Add jwt directory
   file: path={{project_root}}/config/jwt state=directory mode=0755
   when: project_type == 'default' and symfony_version == '4'
