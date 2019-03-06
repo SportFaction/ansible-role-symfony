@@ -1,7 +1,9 @@
 - cron:
     name: "access token google"
     minute: "*/30"
+    user: root
     job: "cd /var/www/sf-back/ && sudo bin/console sf:core:google:refresh_token"
+    cron_file: google_access_token
 - cron:
     name: cloudwatch-memory-asg-job
     minute: "*/5"
