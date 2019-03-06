@@ -2,3 +2,15 @@
     name: "access token google"
     minute: "*/30"
     job: "cd /var/www/sf-back/ && sudo bin/console sf:core:google:refresh_token"
+- cron:
+    name: cloudwatch-memory-asg-job
+    minute: "*/5"
+    user: root
+    job: "/tmp/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --auto-scaling=only"
+    cron_file: cloudwatch_asg_memory
+- cron:
+    name: cloudwatch-disk-space-asg-job
+    minute: "*/5"
+    user: root
+    job: "/tmp/aws-scripts-mon/mon-put-instance-data.pl --disk-path=/ --disk-space-util --disk-space-avail --disk-space-used --auto-scaling=only"
+    cron_file: cloudwatch_asg_space_disk
