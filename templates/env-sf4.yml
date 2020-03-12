@@ -40,3 +40,6 @@ sdapi_key={{ sdapi_key }}
 android_api_key={{ android_api_key }}
 ios_api_key={{ ios_api_key }}
 cors_allow_origin=http://localhost
+
+###< google/apiclient ###
+GOOGLE_BIG_QUERY_PROJECT_ID=sportfaction
