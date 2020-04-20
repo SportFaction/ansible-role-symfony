@@ -1,42 +1,80 @@
 ---
 
-- name: Check if composer exists.
-  stat: path={{composer_path}}
-  register: composer_file
-  when: manage_composer == True
+- name: Get Composer installer signature.
+  uri:
+    url: https://composer.github.io/installer.sig
+    return_content: true
+  register: composer_installer_signature
+  when: not composer_bin.stat.exists
 
-- name: Install composer.
-  get_url: url=https://getcomposer.org/composer.phar dest={{composer_path}} mode=0755 validate_certs=no
-  when: manage_composer == True and composer_file.stat.exists == False
+- name: Download Composer installer.
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer-installer.php
+    mode: 0755
+    checksum: "sha384:{{ composer_installer_signature.content }}"
+  when: not composer_bin.stat.exists
 
-- name: Update composer if already exists.
-  shell: "{{composer_path}} selfupdate"
-  when: composer_file.stat.exists == True and manage_composer == True
+- name: Run Composer installer.
+  command: >
+    {{ php_executable }} composer-installer.php {% if composer_version %} --version={{ composer_version }}{% endif %}
+    chdir=/tmp
+  when: not composer_bin.stat.exists
 
-- name: Add github token
-  shell: "{{composer_path}} config -g github-oauth.github.com {{github_token}}"
-  when: github_token != None
+- name: Move Composer into globally-accessible location.
+  command: >
+    mv /tmp/composer.phar {{ composer_path }}
+    creates={{ composer_path }}
+  when: not composer_bin.stat.exists
 
-- name: Link composer to project dir.
-  file: state=link src={{composer_path}} path={{project_root}}/composer
-  when: manage_composer == True
+- name: Update Composer to latest version (if configured).
+  command: >
+    {{ php_executable }} {{ composer_path }} self-update
+  register: composer_update
+  changed_when: "'Updating to version' in composer_update.stdout"
+  when: composer_keep_updated | bool
+
+- name: Ensure composer directory exists.
+  file:
+    path: "{{ composer_home_path }}"
+    owner: "{{ composer_home_owner }}"
+    group: "{{ composer_home_group }}"
+    state: directory
+
+- name: Add GitHub OAuth token for Composer (if configured).
+  become: true
+  become_user: "{{ composer_home_owner }}"
+  template:
+    src: "auth.json.j2"
+    dest: "{{ composer_home_path }}/auth.json"
+    owner: "{{ composer_home_owner }}"
+    group: "{{ composer_home_group }}"
+  when: composer_github_oauth_token | length > 0
+
+- name: Install configured globally-required packages.
+  command: >
+    {{ composer_path }} global require {{ item.name }}:{{ item.release | default('@stable') }} --no-progress --no-interaction
+    creates={{ composer_home_path }}/vendor/{{ item.name }}
+  environment:
+    COMPOSER_HOME: "{{ composer_home_path }}"
+  become: true
+  become_user: "{{ composer_home_owner }}"
+  register: composer_global_require_result
+  with_items: "{{ composer_global_packages }}"
+
+- name: Add composer_home_path bin directory to global $PATH.
+  template:
+    src: composer.sh.j2
+    dest: /etc/profile.d/composer.sh
+    mode: 0644
+  when: composer_add_to_path | bool
+
+- name: Add composer_project_path bin directory to global $PATH.
+  template:
+    src: composer-project.sh.j2
+    dest: /etc/profile.d/composer-project.sh
+    mode: 0644
 
 - name: Run composer install.
-  shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress --no-suggest
-  when: composer_run_install == True and build == 'aws'
+  shell: cd {{project_root}} && {{composer_path}} install
 
-# - name: Run composer install.
-#   shell: cd {{project_root}} && {{composer_path}} install
-#   when: composer_run_install == True and build == 'aws' and symfony_version == '4'
-
-- name: Run composer install.
-  shell: cd {{project_root}} && {{composer_path}} install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest
-  when: composer_run_install == True and build == 'vagrant'
-
-- name: Generate Class Map
-  shell: "cd {{project_root}} && {{composer_path}} dump-autoload --optimize --no-dev --classmap-authoritative"
-  when: composer_run_install == True and build == 'aws'
-
-- name: Generate Class Map
-  shell: "cd {{project_root}} && {{composer_path}} dump-autoload --optimize --classmap-authoritative"
-  when: composer_run_install == True and build == 'vagrant'
