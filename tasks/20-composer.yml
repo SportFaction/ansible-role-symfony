@@ -65,12 +65,6 @@
     mode: 0644
   when: composer_add_to_path | bool
 
-- name: Add composer_project_path bin directory to global $PATH.
-  template:
-    src: composer-project.sh.j2
-    dest: /etc/profile.d/composer-project.sh
-    mode: 0644
-
 - name: Run composer install.
   shell: cd {{project_root}} && {{composer_path}} install
 
