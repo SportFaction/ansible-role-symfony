@@ -17,7 +17,6 @@
   command: >
     {{ php_executable }} composer-installer.php {% if composer_version %} --version={{ composer_version }}{% endif %}
     chdir=/tmp
-  become_user: ubuntu  
 
 - name: Move Composer into globally-accessible location.
   command: >
@@ -68,5 +67,4 @@
 
 - name: Run composer install.
   shell: cd {{project_root}} && {{composer_path}} install
-  become_user: ubuntu
 
