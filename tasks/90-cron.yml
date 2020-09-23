@@ -1,6 +1,6 @@
 - cron:
     name: "update jerseys value"
-    minute: "1"
+    minute: "0"
     hour: "1"
     user: root
     job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_value"
