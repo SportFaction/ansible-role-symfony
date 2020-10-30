@@ -67,4 +67,5 @@
 
 - name: Run composer install.
   shell: cd {{project_root}} && {{composer_path}} install
+  become_user: "{{ composer_home_owner }}"
 
