@@ -6,13 +6,6 @@
     job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_value"
     cron_file: update_jerseys_value
 - cron:
-    name: "update jerseys popularity"
-    minute: "20"
-    hour: "1"
-    user: root
-    job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_popularity"
-    cron_file: update_jerseys_popularity
-- cron:
     name: "update jerseys form"
     minute: "40"
     hour: "1"
