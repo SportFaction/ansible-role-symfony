@@ -13,6 +13,13 @@
     job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_form"
     cron_file: update_jerseys_form
 - cron:
+    name: "update jerseys popularity"
+    minute: "20"
+    hour: "1"
+    user: root
+    job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_popularity"
+    cron_file: update_jerseys_popularity
+- cron:
     name: "access token google"
     minute: "*/30"
     user: root
