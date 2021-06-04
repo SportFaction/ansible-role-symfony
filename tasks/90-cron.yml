@@ -20,6 +20,13 @@
     job: "cd /var/www/sf-back/ && sudo bin/console sf:championship:jersey:update_jerseys_popularity"
     cron_file: update_jerseys_popularity
 - cron:
+    name: "reset league road season"
+    minute: "0"
+    hour: "0"
+    user: root
+    job: "cd /var/www/sf-back/ && sudo bin/console sf:ligueroad:reset_ligue_road_season"
+    cron_file: reset_ligue_road_season
+- cron:
     name: "access token google"
     minute: "*/30"
     user: root
