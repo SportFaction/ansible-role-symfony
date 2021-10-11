@@ -43,3 +43,6 @@ cors_allow_origin=http://localhost
 
 ###< google/apiclient ###
 GOOGLE_BIG_QUERY_PROJECT_ID=sportfaction
+
+# SportMonks API key
+sm_key=jP6XRFK5BCB2aJ77S6KVMvPiSR50PFeHZqSAdCOFgxvItpwjOSI4DMkD3Aux
